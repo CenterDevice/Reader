@@ -28,6 +28,7 @@
 #endif
 
 #import <Foundation/Foundation.h>
+#import "CDReaderConstants.h"
 
 #define READER_FLAT_UI TRUE
 #define READER_SHOW_SHADOWS TRUE
@@ -35,5 +36,5 @@
 #define READER_DISABLE_RETINA FALSE
 #define READER_ENABLE_PREVIEW TRUE
 #define READER_DISABLE_IDLE FALSE
-#define READER_STANDALONE FALSE
-#define READER_BOOKMARKS TRUE
+#define READER_STANDALONE TRUE
+#define READER_BOOKMARKS FALSE
