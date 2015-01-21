@@ -28,7 +28,7 @@
 #endif
 
 #import <Foundation/Foundation.h>
-#import "CDReaderConstants.h"
+#import "CDVfrReaderConstants.h"
 
 #define READER_FLAT_UI TRUE
 #define READER_SHOW_SHADOWS TRUE
