@@ -224,7 +224,13 @@
 		[mainToolbar setBookmarkState:[document.bookmarks containsIndex:page]];
 
 		[mainPagebar updatePagebar]; // Update page bar
-	}
+
+        id <ReaderViewControllerDelegate> o = self.delegate;
+        if ([o respondsToSelector:@selector(didShowPage:)])
+        {
+            [o didShowPage:page];
+        }
+    }
 }
 
 - (void)showDocumentPage:(NSInteger)page
@@ -252,7 +258,13 @@
 		[mainToolbar setBookmarkState:[document.bookmarks containsIndex:page]];
 
 		[mainPagebar updatePagebar]; // Update page bar
-	}
+
+        id <ReaderViewControllerDelegate> o = self.delegate;
+        if ([o respondsToSelector:@selector(didShowPage:)])
+        {
+            [o didShowPage:page];
+        }
+    }
 }
 
 - (void)showDocument
@@ -282,6 +294,21 @@
 	{
 		NSAssert(NO, @"Delegate must respond to -dismissReaderViewController:");
 	}
+}
+
+- (NSInteger) currentPage
+{
+    return currentPage;
+}
+
+- (NSInteger) minimumPage
+{
+    return minimumPage;
+}
+
+- (NSInteger) maximumPage
+{
+    return maximumPage;
 }
 
 #pragma mark - UIViewController methods
@@ -360,7 +387,7 @@
 	mainToolbar.delegate = self; // ReaderMainToolbarDelegate
 	[self.view addSubview:mainToolbar];
 #endif
-    
+
 	CGRect pagebarRect = self.view.bounds; pagebarRect.size.height = PAGEBAR_HEIGHT;
 	pagebarRect.origin.y = (self.view.bounds.size.height - pagebarRect.size.height);
 	mainPagebar = [[ReaderMainPagebar alloc] initWithFrame:pagebarRect document:document]; // ReaderMainPagebar

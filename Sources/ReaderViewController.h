@@ -35,6 +35,7 @@
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController;
 
+- (void)didShowPage:(NSInteger)page;
 @end
 
 @interface ReaderViewController : UIViewController
@@ -42,5 +43,13 @@
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;
 
 - (instancetype)initWithReaderDocument:(ReaderDocument *)object;
+
+- (void)showDocumentPage:(NSInteger)page;
+
+- (NSInteger) currentPage;
+
+- (NSInteger) minimumPage;
+
+- (NSInteger) maximumPage;
 
 @end
