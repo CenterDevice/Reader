@@ -25,6 +25,7 @@
 
 #import "ReaderDocument.h"
 #import "CGPDFDocument.h"
+#import "Crittercism.h"
 #import <fcntl.h>
 
 @interface ReaderDocument ()
@@ -164,6 +165,7 @@
 
 + (BOOL)isPDF:(NSString *)filePath
 {
+	[Crittercism leaveBreadcrumb:@"Checking if document is PDF"];
 	BOOL state = NO;
 
 	if (filePath != nil) // Must have a file path
@@ -172,6 +174,7 @@
 
 		int fd = open(path, O_RDONLY); // Open the file
 
+		[Crittercism leaveBreadcrumb:[NSString stringWithFormat:@"fd = %d", fd]];
 		if (fd > 0) // We have a valid file descriptor
 		{
 			const char sig[1024]; // File signature buffer
@@ -179,6 +182,7 @@
 			ssize_t len = read(fd, (void *)&sig, sizeof(sig));
 
 			state = (strnstr(sig, "%PDF", len) != NULL);
+			[Crittercism leaveBreadcrumb:[NSString stringWithFormat:@"PDF-State = %@", state ? @"YES" : @"NO"]];
 
 			close(fd); // Close the file
 		}
@@ -193,6 +197,7 @@
 {
 	if ((self = [super init])) // Initialize superclass first
 	{
+		[Crittercism leaveBreadcrumb:@"Initializing VFR-ReaderDocument"];
 		if ([ReaderDocument isPDF:filePath] == YES) // Valid PDF
 		{
 			_guid = [ReaderDocument GUID]; // Create document's GUID
@@ -236,6 +241,7 @@
 		}
 		else // Not a valid PDF file
 		{
+			[Crittercism leaveBreadcrumb:[NSString stringWithFormat:@"Not a valid PDF: %@", filePath]];
 			self = nil;
 		}
 	}
