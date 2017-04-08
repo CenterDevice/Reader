@@ -25,7 +25,7 @@
 
 #import "ReaderDocument.h"
 #import "CGPDFDocument.h"
-#import "Crittercism.h"
+#import <Crittercism/Crittercism.h>
 #import <fcntl.h>
 
 @interface ReaderDocument ()
